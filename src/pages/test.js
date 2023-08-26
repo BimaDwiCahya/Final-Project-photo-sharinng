@@ -3,8 +3,8 @@ import Link from "next/link";
 import axios from "axios";
  import { useState } from "react";
 
-const register = () => {
-    const [post, setPost] = useState({
+const test = () => {
+    const data = {
         name: "",
         username: "",
         email: "",
@@ -13,38 +13,36 @@ const register = () => {
         profilePictureUrl: "",
         bio: "",
         website: ""
-    })
+    };
+    const [post, setPost] = useState(data)
+
     const handleInput = (e) => {
         setPost({...post, [e.target.name]: e.target.value})
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
 
         e.preventDefault()
         console.log(post)
-        try{
-            await fetch('https://photo-sharing-api-bootcamp.do.dibimbing.id/api/v1/register',{
-                method: 'POST',
-                headers: new Headers({
-                    apiKey:'c7b411cc-0e7c-4ad1-aa3f-822b00e7734b',
-                    'Content-Type': 'application/json',
-                }),
-                body: JSON.stringify({
-                    name: "bima",
-                    username: "bima dwi",
-                    email: "bima1@gmail.com",
-                    password: "qwerty1231",
-                    passwordRepeat: "qwerty1231",
-                    profilePictureUrl: "",
-                    bio: "no bio",
-                    website: "no website"
-                })
-            });
-
-            alert('BERHASIL');
-        } catch (error){console.log(error);}
-    }
-    console.log(post)
+        axios.post('https://photo-sharing-api-bootcamp.do.dibimbing.id/api/v1/register',{
+            name: "",
+            username: "",
+            email: "bimd2131@gmail.com",
+            password: "qwerty123431",
+            passwordRepeat: "qwerty123431",
+            profilePictureUrl: "",
+            bio: "",
+            website: ""
+        },
+        {
+            headers: {
+                apiKey: "c7b411cc-0e7c-4ad1-aa3f-822b00e7734b",
+                "Content-type": "application/json",
+            }
+        }
+        )
+            .then((response)=>{console.log(response)})
+        }
     return (
         <>
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -111,4 +109,4 @@ const register = () => {
     )
 }
 
-export default register
+export default test
