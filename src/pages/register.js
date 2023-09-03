@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
- import { useState } from "react";
+import { useState } from "react";
 
-const register = () => {
-    const [post, setPost] = useState({
+const Test = () => {
+    const dataRegister = {
         name: "",
         username: "",
         email: "",
@@ -13,38 +13,36 @@ const register = () => {
         profilePictureUrl: "",
         bio: "",
         website: ""
-    })
+    };
+    const [post, setPost] = useState(dataRegister)
+
     const handleInput = (e) => {
         setPost({...post, [e.target.name]: e.target.value})
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
 
         e.preventDefault()
         console.log(post)
-        try{
-            await fetch('https://photo-sharing-api-bootcamp.do.dibimbing.id/api/v1/register',{
-                method: 'POST',
-                headers: new Headers({
-                    apiKey:'c7b411cc-0e7c-4ad1-aa3f-822b00e7734b',
-                    'Content-Type': 'application/json',
-                }),
-                body: JSON.stringify({
-                    name: "bima",
-                    username: "bima dwi",
-                    email: "bima1@gmail.com",
-                    password: "qwerty1231",
-                    passwordRepeat: "qwerty1231",
-                    profilePictureUrl: "",
-                    bio: "no bio",
-                    website: "no website"
-                })
-            });
-
-            alert('BERHASIL');
-        } catch (error){console.log(error);}
-    }
-    console.log(post)
+        axios.post(`https://photo-sharing-api-bootcamp.do.dibimbing.id/api/v1/register`,{
+            name: "",
+            username: "",
+            email: "bimd21311@gmail.com",
+            password: "qwerty1234311",
+            passwordRepeat: "qwerty1234311",
+            profilePictureUrl: "",
+            bio: "",
+            website: ""
+        },
+        {
+            headers: {
+                apiKey: "c7b411cc-0e7c-4ad1-aa3f-822b00e7734b",
+                "Content-type": "application/json",
+            }
+        }
+        )
+            .then((response)=>{console.log(response)})
+        }
     return (
         <>
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -57,7 +55,7 @@ const register = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Create and account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit} autoComplete="on">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit} autoComplete="off">
                   <div>
                       <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">name</label>
                       <input onChange={handleInput} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="your name" required=""/>
@@ -111,4 +109,4 @@ const register = () => {
     )
 }
 
-export default register
+export default Test
